@@ -2,15 +2,17 @@
 
 {% block content %}
 <div class="container my-5">
-    <form method="post"  enctype="multipart/form-data">
-        {{ form.as_p}}
-        <button class="btn btn-primary my-5" type="submit"> Submit</button>
+    <form method="post" enctype="multipart/form-data">
+        <table class="table">
+            {{ form.as_table }}
+        </table>
+        <button class="btn btn-primary my-5" type="submit">Submit</button>
         {% csrf_token %}
     </form>
 
     {% if form.errors %}
     <div class="alert alert-danger my-5">
-        {{form.errors.title.as_text}}
+        {{ form.errors }}
     </div>
     {% endif %}
 
