@@ -53,3 +53,9 @@ class ArticuloUpdateView(LoginRequiredMixin, UpdateView):
     model = Articulo
     success_url = '/pages'
     form_class = ArticuloForm
+
+
+class ArticuloDeleteView(LoginRequiredMixin, DeleteView):
+    model = Articulo
+    success_url = '/pages'
+    template_name = 'blogApp/articulo_delete.html'
