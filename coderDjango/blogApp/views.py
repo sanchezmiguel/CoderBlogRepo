@@ -14,6 +14,24 @@ from blogApp.models import Articulo
 class ArticuloListView(ListView):
     model = Articulo
     context_object_name = 'articulos'
+    template_name = 'tu_template.html'
+
+    def get_queryset(self):
+        # Obtén el valor del parámetro 'orden' de la URL
+        orden = self.request.GET.get('orden')
+
+        # Define la consulta base sin ordenamiento
+        queryset = Articulo.objects.all()
+
+        # Verifica el valor de 'orden' y ordena los artículos en consecuencia
+        if orden == 'title':
+            queryset = queryset.order_by('title')
+        elif orden == 'author':
+            queryset = queryset.order_by('author')
+        else:
+            queryset = queryset.order_by('created')
+
+        return queryset
 
 
 class ArticuloDetailView(DetailView):
@@ -27,13 +45,11 @@ class ArticuloCreateView(LoginRequiredMixin, CreateView):
     form_class = ArticuloForm
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
-        return HttpResponseRedirect(self.get_success_url())
+        form.instance.author = self.request.user  # Asigna el autor al usuario actual
+        return super().form_valid(form)
 
 
-class ArticuloUpdateView(LoginRequiredMixin,UpdateView):
+class ArticuloUpdateView(LoginRequiredMixin, UpdateView):
     model = Articulo
     success_url = '/pages'
     form_class = ArticuloForm
