@@ -25,7 +25,6 @@ class ArticuloCreateView(LoginRequiredMixin, CreateView):
     model = Articulo
     success_url = '/pages'
     form_class = ArticuloForm
-    login_url = '/login'
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -34,7 +33,7 @@ class ArticuloCreateView(LoginRequiredMixin, CreateView):
         return HttpResponseRedirect(self.get_success_url())
 
 
-class ArticuloUpdateView(UpdateView):
+class ArticuloUpdateView(LoginRequiredMixin,UpdateView):
     model = Articulo
     success_url = '/pages'
     form_class = ArticuloForm
