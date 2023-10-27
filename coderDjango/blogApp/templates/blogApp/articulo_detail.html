@@ -14,8 +14,9 @@
     <p>Published on: {{articulo.created}}</p>
 </div>
 
-<a class="btn btn-secondary" href="{% url 'articulo.list' %}">Cancel</a>
-<a class="btn btn-secondary" href="{% url 'articulo.update' pk=articulo.id %}">Edit</a>
-<a class="btn btn-danger" href="{% url 'articulo.delete' pk=articulo.id %}">Delete</a>
-
+<div class="container mt-3">
+    <a class="btn btn-secondary" href="{% url 'articulo.list' %}">Cancel</a>
+    <a class="btn btn-secondary" href="{% url 'articulo.update' pk=articulo.id %}">Edit</a>
+    <a class="btn btn-danger" href="{% url 'articulo.delete' pk=articulo.id %}">Delete</a>
+</div>
 {% endblock %}
