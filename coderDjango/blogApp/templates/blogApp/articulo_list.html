@@ -1,20 +1,39 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 class="my-5">Estos son los Articulos:</h1>
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    {% for articulo in articulos %}
-    <div class="col">
-        <div class="card" style="width: 20rem;">
-            <div class="card-body">
-                <h5 class="card-title">{{articulo.title}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{articulo.subtitle|truncatechars:15}}</h6>
-                <p class="card-text">{{articulo.text|safe|truncatechars:15}}</p>
-                <a href="{% url 'articulo.detail' pk=articulo.id %}" class="btn btn-primary">Ver mas</a>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
+<h1 class="my-5">Articulos de CoderBlog:</h1>
+
+<div class="btn-group" role="group" aria-label="Ordenar por">
+    {% if articulos %}
+    <a href="{% url 'articulo.list' %}?orden=title" class="btn btn-primary mx-1">Ordenar por Titulo</a>
+    <a href="{% url 'articulo.list' %}?orden=author" class="btn btn-primary mx-1">Ordenar por Autor</a>
+    <a href="{% url 'articulo.list' %}?orden=created" class="btn btn-primary mx-1">Ordenar por Fecha</a>
+    {% endif %}
 </div>
 
+<div class="container mt-3">
+    <div class="row">
+        {% if articulos %}
+        {% for articulo in articulos %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                {% if articulo.image %}
+                <img alt="{{ articulo.title }}" class="card-img-top" src="{{ articulo.image.url }}">
+                {% else %}
+                <img alt="{{ articulo.title }}" class="card-img-top">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ articulo.title }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ articulo.subtitle }}</h6>
+                    <p class="card-text">{{ articulo.text|safe|truncatechars:150 }}</p>
+                    <a class="btn btn-primary" href="{% url 'articulo.detail' pk=articulo.id %}">Ver más</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+          <h1>  <p class="mt-3">No hay entradas aún.</p></h1>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
