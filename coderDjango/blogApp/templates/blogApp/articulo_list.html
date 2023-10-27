@@ -3,14 +3,8 @@
 {% block content %}
 <h1 class="my-5">These are the notes:</h1>
 
-    {% for note in notes %}
+    {% for articulo in articulos %}
     <div class="col">
-<!--        <div class="p-3 border">-->
-<!--            <a class="text-dark text-decoration-non" href="{% url 'notes.detail' pk=note.id %}"><h3>-->
-<!--                {{note.title}} [{{note.category}}] </h3></a>-->
-
-<!--            {{note.text|truncatechars:15}}-->
-<!--        </div>-->
         <div class="card" style="width: 20rem;">
 {{articulo.text}}
         </div>
