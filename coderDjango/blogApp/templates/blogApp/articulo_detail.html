@@ -8,7 +8,7 @@
     <img alt="{{ articulo.title }} Image" class="img-fluid" src="{{ articulo.image.url }}">
     {% endif %}
     <div class="my-5 ckeditor">
-        <p class="my-5"> {{articulo.text}} </p>
+        <p class="my-5"> {{articulo.text|safe}} </p>
     </div>
     <p>Author: {{articulo.author.username}}</p>
     <p>Published on: {{articulo.created}}</p>
