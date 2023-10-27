@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container my-5">
-    <form method="post">
+    <form method="post"  enctype="multipart/form-data">
         {{ form.as_p}}
         <button class="btn btn-primary my-5" type="submit"> Submit</button>
         {% csrf_token %}
