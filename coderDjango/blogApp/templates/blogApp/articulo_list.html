@@ -10,7 +10,7 @@
                 <h5 class="card-title">{{articulo.title}}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">{{articulo.subtitle|truncatechars:15}}</h6>
                 <p class="card-text">{{articulo.text|safe|truncatechars:15}}</p>
-
+                <a href="{% url 'articulo.detail' pk=articulo.id %}" class="btn btn-primary">Ver mas</a>
             </div>
         </div>
     </div>

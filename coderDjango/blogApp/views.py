@@ -14,3 +14,7 @@ from blogApp.models import Articulo
 class ArticuloListView(ListView):
     model = Articulo
     context_object_name = 'articulos'
+
+class ArticuloDetailView(DetailView):
+    model = Articulo
+    context_object_name = 'articulo'
