@@ -5,15 +5,15 @@
     <h1 class="my-5">{{articulo.title}} </h1>
     <h2 class="my-5">{{articulo.subtitle}} </h2>
     {% if articulo.image %}
-        <img src="{{ articulo.image.url }}" alt="{{ articulo.title }} Image" class="img-fluid">
+    <img alt="{{ articulo.title }} Image" class="img-fluid" src="{{ articulo.image.url }}">
     {% endif %}
-    <p class="my-5"> {{articulo.text|safe}} </p>
+    <div class="my-5 ckeditor">
+        <p class="my-5"> {{articulo.text}} </p>
+    </div>
     <p>Author: {{articulo.author.username}}</p>
     <p>Published on: {{articulo.created}}</p>
 </div>
 
 <a class="btn btn-secondary" href="{% url 'articulo.list' %}">Cancel</a>
-
-
 
 {% endblock %}
