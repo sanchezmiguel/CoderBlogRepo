@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <form method="post">
+        {{ form.as_p}}
+        <button class="btn btn-primary my-5" type="submit"> Submit</button>
+        {% csrf_token %}
+    </form>
+
+    {% if form.errors %}
+    <div class="alert alert-danger my-5">
+        {{form.errors.title.as_text}}
+    </div>
+    {% endif %}
+
+    <a class="btn btn-secondary" href="{% url 'articulo.list' %}">Cancel</a>
+</div>
+{% endblock %}

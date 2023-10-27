@@ -7,11 +7,11 @@ from ckeditor.widgets import CKEditorWidget
 class ArticuloForm(forms.ModelForm):
     class Meta:
         model = Articulo
-        fields = ['title', 'subtitle', 'text', 'image']  # Include 'image' field
+        fields = ['title', 'subtitle', 'text', 'image']
         widgets = {
             'title': forms.TextInput(),
             'subtitle': forms.TextInput(),
-            'text': CKEditorWidget(),
+            'text': CKEditorWidget(config_name='default'),
             'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
         labels = {

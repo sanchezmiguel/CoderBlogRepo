@@ -15,6 +15,26 @@ class ArticuloListView(ListView):
     model = Articulo
     context_object_name = 'articulos'
 
+
 class ArticuloDetailView(DetailView):
     model = Articulo
     context_object_name = 'articulo'
+
+
+class ArticuloCreateView(LoginRequiredMixin, CreateView):
+    model = Articulo
+    success_url = '/pages'
+    form_class = ArticuloForm
+    login_url = '/login'
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+
+class ArticuloUpdateView(UpdateView):
+    model = Articulo
+    success_url = '/pages'
+    form_class = ArticuloForm
