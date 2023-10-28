@@ -3,41 +3,47 @@
 {% load static %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Usuarios</h2>
-            <select id="userSelect">
-                <option value="">Selecciona un usuario</option>
-                {% for user in all_users %}
-                    <option value="{{ user.id }}">{{ user.username }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="col-md-8">
-            <h2>Chats</h2>
-            <ul>
-                {% for chat in user_chats %}
-                    <li>
-                        Chat entre {{ chat.usuario_1 }} y {{ chat.usuario_2 }}
+<div class="row">
+    <div class="col-md-4">
+        <h2>Usuarios</h2>
+        <select id="userSelect">
+            <option value="">Selecciona un usuario</option>
+            {% for user in all_users %}
+            <option value="{{ user.id }}">{{ user.username }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-8">
+        <h2>Chats</h2>
+        <ul>
+            {% for chat in user_chats %}
+            <li>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Chat entre {{ chat.usuario_1 }} y {{ chat.usuario_2 }}</h5>
+                        <p class="card-text">
                         <ul>
                             {% for message in messages %}
-                                {% if message.chat == chat %}
-                                    <li>{{ message.fecha_creacion|date:"F j, Y, g:i a" }} - {{ message.texto }}</li>
-                                {% endif %}
+                            {% if message.chat == chat %}
+                            <li>{{ message.fecha_creacion|date:"F j, Y, g:i a" }} - {{ message.texto }}</li>
+                            {% endif %}
                             {% endfor %}
                         </ul>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
+                        </p>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
     </div>
-    <script>
-        document.getElementById('userSelect').addEventListener('change', function() {
-            var selectedUserId = this.value;
-            if (selectedUserId) {
-                // Redirige a la página que muestra los chats de ese usuario (puedes personalizar la URL según tu estructura de rutas)
-                window.location.href = '/messages/' + selectedUserId + '/';
-            }
-        });
-    </script>
+</div>
+<script>
+    document.getElementById('userSelect').addEventListener('change', function () {
+        var selectedUserId = this.value;
+        if (selectedUserId) {
+            // Redirige a la página que muestra los chats de ese usuario (puedes personalizar la URL según tu estructura de rutas)
+            window.location.href = '/messages/' + selectedUserId + '/';
+        }
+    });
+</script>
 {% endblock %}
