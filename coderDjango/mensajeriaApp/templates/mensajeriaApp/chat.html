@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Usuarios</h2>
+            <ul>
+                {% for user in all_users %}
+                    <li>{{ user.username }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-8">
+            <h2>Chats</h2>
+            <ul>
+                {% for chat in user_chats %}
+                    <li>
+                        Chat entre {{ chat.usuario_1 }} y {{ chat.usuario_2 }}
+                        <ul>
+                            {% for message in messages %}
+                                {% if message.chat == chat %}
+                                    <li>{{ message.fecha_creacion|date:"F j, Y, g:i a" }} - {{ message.texto }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

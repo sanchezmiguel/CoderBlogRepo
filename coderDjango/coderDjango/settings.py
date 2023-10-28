@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     #Mis Apps
     'blogApp',
     'perfilesApp',
+    'mensajeriaApp',
+
 ]
 
 MIDDLEWARE = [

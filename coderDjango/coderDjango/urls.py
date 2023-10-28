@@ -25,6 +25,7 @@ urlpatterns = [
     path('',include('blogApp.urls')),
     path('pages/',include('blogApp.urls')),
     path('accounts/',include('perfilesApp.urls')),
+    path('messages/',include('mensajeriaApp.urls')),
     path('about/', about_creator, name='about_creator'),
 ]
 
