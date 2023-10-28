@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <h2>Chats y mensajes con {{ selected_user.username }}</h2>
+
+    {% if selected_user %}
+        <div class="user-info">
+            <strong>Nombre de usuario:</strong> {{ selected_user.username }}
+            <br>
+            <strong>Correo electrónico:</strong> {{ selected_user.email }}
+        </div>
+        <hr>
+
+        <h3>Chats</h3>
+        <ul>
+            {% for chat in user_chats %}
+                <li>
+                    Chat entre {{ chat.usuario_1 }} y {{ chat.usuario_2 }}
+                    <ul>
+                        {% for message in messages %}
+                            {% if message.chat == chat %}
+                                <li>{{ message.fecha_creacion|date:"F j, Y, g:i a" }} - {{ message.texto }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>El usuario seleccionado no existe.</p>
+    {% endif %}
+</div>
+{% endblock %}

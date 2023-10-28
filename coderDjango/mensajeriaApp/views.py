@@ -4,6 +4,7 @@ from django.views import View
 from django.contrib.auth.models import User
 from .models import Chat, Message
 
+
 class MessagesView(LoginRequiredMixin, View):
     model = Chat
     success_url = '/pages'
@@ -24,4 +25,39 @@ class MessagesView(LoginRequiredMixin, View):
             'messages': messages
         }
 
-        return render(request, 'mensajeriaApp/chat.html', context)
+        return render(request, 'mensajeriaApp/messages.html', context)
+
+
+class UserChatsView(LoginRequiredMixin, View):
+    model = Chat
+    success_url = '/pages'
+
+    def get(self, request, user_id):
+        try:
+            # Obtén el usuario seleccionado por su ID
+            selected_user = User.objects.get(id=user_id)
+        except User.DoesNotExist:
+            # Maneja el caso en el que el usuario no existe
+            selected_user = None
+
+        if selected_user:
+            # Obtener todos los chats del usuario seleccionado
+            user_chats = Chat.objects.filter(usuario_1=selected_user) | Chat.objects.filter(usuario_2=selected_user)
+
+            # Obtener todos los mensajes de esos chats
+            messages = Message.objects.filter(chat__in=user_chats)
+
+            context = {
+                'selected_user': selected_user,
+                'user_chats': user_chats,
+                'messages': messages
+            }
+        else:
+            # Puedes manejar el caso en el que el usuario no existe
+            context = {
+                'selected_user': None,
+                'user_chats': [],
+                'messages': []
+            }
+
+        return render(request, 'mensajeriaApp/user_chats.html', context)

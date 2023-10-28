@@ -6,11 +6,12 @@
     <div class="row">
         <div class="col-md-4">
             <h2>Usuarios</h2>
-            <ul>
+            <select id="userSelect">
+                <option value="">Selecciona un usuario</option>
                 {% for user in all_users %}
-                    <li>{{ user.username }}</li>
+                    <option value="{{ user.id }}">{{ user.username }}</option>
                 {% endfor %}
-            </ul>
+            </select>
         </div>
         <div class="col-md-8">
             <h2>Chats</h2>
@@ -30,4 +31,13 @@
             </ul>
         </div>
     </div>
+    <script>
+        document.getElementById('userSelect').addEventListener('change', function() {
+            var selectedUserId = this.value;
+            if (selectedUserId) {
+                // Redirige a la página que muestra los chats de ese usuario (puedes personalizar la URL según tu estructura de rutas)
+                window.location.href = '/messages/' + selectedUserId + '/';
+            }
+        });
+    </script>
 {% endblock %}
