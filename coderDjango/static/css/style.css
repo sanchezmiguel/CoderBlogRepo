@@ -3,6 +3,12 @@
     --primary_dark: #e64a19;
     --accent: #ff5177;
 }
+/*:root {*/
+/*    --primario: #1976D2; !*Azul índigo*!*/
+/*    --secundario_fondo: #EEEEEE; !* Gris claro *!*/
+/*    --secundario_interactivo:#03A9F4; !* Azul claro *!*/
+/*    --accento: #FF5722;  !* naranja *!*/
+/*}*/
 
 .bg-header {
     background-color: var(--primary_dark);
