@@ -3,43 +3,45 @@
 {% load static %}
 
 {% block content %}
-    <h2>Chats y mensajes con {{ selected_user.username }}</h2>
+<h2>Chats y mensajes con {{ selected_user.username }}</h2>
 
-    {% if selected_user %}
-        <div class="user-info">
-            <strong>Nombre de usuario:</strong> {{ selected_user.username }}
-            <br>
-            <strong>Correo electrónico:</strong> {{ selected_user.email }}
-        </div>
-        <hr>
+{% if selected_user %}
+<div class="user-info">
+    <strong>Nombre de usuario:</strong> {{ selected_user.username }}
+    <br>
+    <strong>Correo electrónico:</strong> {{ selected_user.email }}
+</div>
+<hr>
 
-        <h3>Chats</h3>
+<h3>Chats</h3>
+<ul>
+    {% for chat in user_chats %}
+    <li>
+        Chat entre {{ chat.usuario_1 }} y {{ chat.usuario_2 }}
         <ul>
-            {% for chat in user_chats %}
-                <li>
-                    Chat entre {{ chat.usuario_1 }} y {{ chat.usuario_2 }}
-                    <ul>
-                        {% for message in messages %}
-                            {% if message.chat == chat %}
-                                <li>{{ message.fecha_creacion|date:"F j, Y, g:i a" }} - {{ message.texto }}</li>
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
-                </li>
+            {% for message in messages %}
+            {% if message.chat == chat %}
+            <li>{{ message.fecha_creacion|date:"F j, Y, g:i a" }} - {{ message.texto }}</li>
+            {% endif %}
             {% endfor %}
         </ul>
+    </li>
+    {% endfor %}
+</ul>
 
-        <hr>
-        <h3>Enviar mensaje:</h3>
-        <form method="post" action="{% url 'enviar_mensaje' %}">
-            {% csrf_token %}
-            <input type="hidden" name="receptor" value="{{ selected_user.id }}">
-            <textarea name="mensaje" rows="4" cols="50" required></textarea>
-            <br>
-            <input type="submit" value="Enviar mensaje">
-        </form>
-    {% else %}
-        <p>El usuario seleccionado no existe.</p>
-    {% endif %}
+<hr>
+<h3>Enviar mensaje:</h3>
+<form action="{% url 'enviar_mensaje' %}" method="post">
+    {% csrf_token %}
+    <input name="receptor" type="hidden" value="{{ selected_user.id }}">
+    <textarea cols="50" name="mensaje" required rows="4"></textarea>
+    <br>
+    <input type="submit" value="Enviar mensaje">
+</form>
+<br>
+<a class="btn btn-primary" href="{% url 'messages' %}">Volver a Messages</a>
+{% else %}
+<p>El usuario seleccionado no existe.</p>
+{% endif %}
 </div>
 {% endblock %}
