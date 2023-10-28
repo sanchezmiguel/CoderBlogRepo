@@ -17,7 +17,7 @@
         <a href="{% url 'about_creator' %}" class="btn btn-outline-light me-1">About</a>
         {% if user.is_authenticated %}
             <a href="{% url 'articulo.new' %}" class="btn btn-outline-light me-1">Create New blog</a>
-
+            <a href="{% url 'profile' %}" class="btn btn-outline-light me-1">My Profile</a>
             <a href="{% url 'logout' %}" class="btn btn-outline-light me-1">Logout</a>
         {% else %}
             <a href="{% url 'login' %}" class="btn btn-outline-light me-1">Login</a>

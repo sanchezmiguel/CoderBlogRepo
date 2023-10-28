@@ -1,9 +1,13 @@
-from django.shortcuts import render
+from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import redirect
 from django.db import IntegrityError
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.views.generic.edit import UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import UserProfileForm
 
 from perfilesApp.models import CreatorProfile
 
@@ -58,3 +62,20 @@ def about_creator(request):
     return render(request, 'perfilesApp/about_creator.html', {'profile': profile})
 
 
+class ProfileView(LoginRequiredMixin, UpdateView):
+    model = User
+    form_class = UserProfileForm
+    template_name = 'perfilesApp/profile.html'
+    success_url = '/pages'
+
+    def form_valid(self, form):
+        messages.success(self.request, 'Tu perfil ha sido actualizado exitosamente.')
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request,
+                       'Hubo un error en la actualización de tu perfil. Por favor, verifica los datos ingresados.')
+        return super().form_invalid(form)
+
+    def get_object(self, queryset=None):
+        return self.request.user

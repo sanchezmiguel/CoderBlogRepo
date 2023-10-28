@@ -3,8 +3,8 @@
 {% block content %}
 <form class="form-signin" method='post'>
     {% csrf_token %}
-     <h1 class="h3 mb-3 font-weight-normal">CoderBlog</h1>
-    <img alt="" class="mb-4" >
+    <h1 class="h3 mb-3 font-weight-normal">CoderBlog</h1>
+    <img alt="" class="mb-4">
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <p>{{ form.username.label_tag }}
         {{ form.username }}
