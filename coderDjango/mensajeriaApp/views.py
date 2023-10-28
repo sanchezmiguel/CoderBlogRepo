@@ -1,8 +1,35 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from django.contrib.auth.models import User
 from .models import Chat, Message
+
+
+class EnviarMensajeView(LoginRequiredMixin, View):
+    model = Message
+    success_url = '/pages'
+
+    def post(self, request):
+        # Obtén el ID del receptor y el mensaje del formulario
+        receptor_id = request.POST.get('receptor')
+        mensaje = request.POST.get('mensaje')
+
+        try:
+            # Verifica si el receptor existe
+            receptor = User.objects.get(id=receptor_id)
+        except User.DoesNotExist:
+            receptor = None
+
+        if receptor and mensaje:
+            # Crea un nuevo chat si aún no existe uno entre el remitente y el receptor
+            chat, created = Chat.objects.get_or_create(usuario_1=request.user, usuario_2=receptor)
+
+            # Crea un nuevo mensaje en el chat
+            message = Message(chat=chat, texto=mensaje)
+            message.save()
+
+        # Redirige de vuelta a la página de chats del usuario
+        return redirect('user_chats', user_id=receptor_id)
 
 
 class MessagesView(LoginRequiredMixin, View):

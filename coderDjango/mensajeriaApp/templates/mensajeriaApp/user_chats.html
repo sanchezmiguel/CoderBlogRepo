@@ -28,6 +28,16 @@
                 </li>
             {% endfor %}
         </ul>
+
+        <hr>
+        <h3>Enviar mensaje:</h3>
+        <form method="post" action="{% url 'enviar_mensaje' %}">
+            {% csrf_token %}
+            <input type="hidden" name="receptor" value="{{ selected_user.id }}">
+            <textarea name="mensaje" rows="4" cols="50" required></textarea>
+            <br>
+            <input type="submit" value="Enviar mensaje">
+        </form>
     {% else %}
         <p>El usuario seleccionado no existe.</p>
     {% endif %}
