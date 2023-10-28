@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
@@ -68,22 +69,27 @@ class UserChatsView(LoginRequiredMixin, View):
             selected_user = None
 
         if selected_user:
-            # Obtener todos los chats del usuario seleccionado
-            user_chats = Chat.objects.filter(usuario_1=selected_user) | Chat.objects.filter(usuario_2=selected_user)
+            # Obtener el chat entre el usuario logueado y el usuario seleccionado
+            user_chat = Chat.objects.filter(
+                (Q(usuario_1=request.user, usuario_2=selected_user) | Q(usuario_1=selected_user, usuario_2=request.user))
+            ).first()
 
-            # Obtener todos los mensajes de esos chats
-            messages = Message.objects.filter(chat__in=user_chats)
+            if user_chat:
+                # Obtener todos los mensajes de ese chat
+                messages = Message.objects.filter(chat=user_chat)
+            else:
+                messages = []
 
             context = {
                 'selected_user': selected_user,
-                'user_chats': user_chats,
+                'user_chat': user_chat,
                 'messages': messages
             }
         else:
             # Puedes manejar el caso en el que el usuario no existe
             context = {
                 'selected_user': None,
-                'user_chats': [],
+                'user_chat': None,
                 'messages': []
             }
 
