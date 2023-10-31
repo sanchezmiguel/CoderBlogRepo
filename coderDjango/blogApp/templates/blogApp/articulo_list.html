@@ -19,7 +19,8 @@
         {% if articulos %}
         {% for articulo in articulos %}
         <div class="col-md-4">
-            <div class="card mb-4 card-color">
+
+            <div class="card mb-4 card-color shadow-lg">
                 {% if articulo.image %}
                 <img alt="{{ articulo.title }}" class="card-img-top" src="{{ articulo.image.url }}">
                 {% else %}
@@ -37,6 +38,7 @@
                     </div>
 
                 </div>
+
             </div>
         </div>
         {% endfor %}
