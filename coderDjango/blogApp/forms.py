@@ -27,5 +27,5 @@ class CardSearchForm(forms.Form):
         label='Search Text',
         max_length=100,
         required=False,
-        widget=forms.TextInput(attrs={'placeholder': 'Enter search text'}),  
+        widget=forms.TextInput(attrs={'placeholder': 'Enter search text'}),
     )

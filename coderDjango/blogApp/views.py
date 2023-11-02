@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 from django.views.generic import CreateView, DetailView, UpdateView
 from django.views.generic.edit import DeleteView
 
@@ -34,7 +35,13 @@ class ArticuloListView(ListView):
 
         # Filter based on the search_text
         if search_text:
-            queryset = queryset.filter(text__icontains=search_text)
+            # queryset = queryset.filter(text__icontains=search_text)
+            queryset = queryset.filter(
+                Q(title__icontains=search_text) |
+                Q(subtitle__icontains=search_text) |
+                Q(text__icontains=search_text) |
+                Q(author__username__icontains=search_text)
+            )
 
         # Check the value of 'orden' and order the articles accordingly
         if orden == 'title':
