@@ -1,7 +1,4 @@
-from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView, LogoutView
-from django.views.generic.edit import CreateView
-from django.contrib.auth.forms import UserCreationForm
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -9,10 +6,16 @@ from django.views.generic.edit import UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import UserProfileForm
 
-from perfilesApp.models import CreatorProfile
+from perfilesApp.models import CreatorProfile, UserProfile
 
 
 # Create your views here.
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import redirect
+from django.views.generic.edit import CreateView
+from perfilesApp.models import UserProfile
+
 class SignupView(CreateView):
     form_class = UserCreationForm
     template_name = 'perfilesApp/signup.html'
@@ -22,6 +25,19 @@ class SignupView(CreateView):
         if self.request.user.is_authenticated:
             return redirect('articulo.list')
         return super().get(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        # Save the user registration data
+        response = super().form_valid(form)
+
+        # Create a UserProfile for the new user
+        user = self.object  # Get the newly created user
+        UserProfile.objects.create(user=user)
+
+        # Log in the user after registration
+        login(self.request, user)
+
+        return response
 
 
 class LoginInterfaceView(LoginView):
@@ -63,19 +79,24 @@ def about_creator(request):
 
 
 class ProfileView(LoginRequiredMixin, UpdateView):
-    model = User
+    model = UserProfile
     form_class = UserProfileForm
     template_name = 'perfilesApp/profile.html'
     success_url = '/pages'
 
     def form_valid(self, form):
+        form.save()
         messages.success(self.request, 'Tu perfil ha sido actualizado exitosamente.')
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        messages.error(self.request,
-                       'Hubo un error en la actualización de tu perfil. Por favor, verifica los datos ingresados.')
+        messages.error(self.request, 'Hubo un error en la actualización de tu perfil. Por favor, verifica los datos ingresados.')
         return super().form_invalid(form)
 
     def get_object(self, queryset=None):
-        return self.request.user
+        return UserProfile.objects.get(user=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user_profile'] = self.get_object()
+        return context
