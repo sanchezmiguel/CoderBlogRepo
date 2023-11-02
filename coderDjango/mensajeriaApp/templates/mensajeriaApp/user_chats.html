@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block content %}
-<h2>Chats y mensajes con {{ selected_user.username }}</h2>
+<h2>Enviar mensaje a: {{ selected_user.username }}</h2>
 
 {% if selected_user %}
 <div class="user-info">
@@ -11,26 +11,9 @@
     <br>
     <strong>Correo electrónico:</strong> {{ selected_user.email }}
 </div>
-<hr>
-
-<h3>Chats</h3>
-<ul>
-    {% for chat in user_chats %}
-    <li>
-        Chat entre {{ chat.usuario_1 }} y {{ chat.usuario_2 }}
-        <ul>
-            {% for message in messages %}
-            {% if message.chat == chat %}
-            <li>{{ message.fecha_creacion|date:"F j, Y, g:i a" }} - {{ message.texto }}</li>
-            {% endif %}
-            {% endfor %}
-        </ul>
-    </li>
-    {% endfor %}
-</ul>
 
 <hr>
-<h3>Enviar mensaje:</h3>
+<h3>Texto del mensaje:</h3>
 <form action="{% url 'enviar_mensaje' %}" method="post">
     {% csrf_token %}
     <input name="receptor" type="hidden" value="{{ selected_user.id }}">
