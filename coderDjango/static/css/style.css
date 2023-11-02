@@ -1,8 +1,8 @@
-:root {
-    --primary: #ff5722;
-    --primary_dark: #e64a19;
-    --accent: #ff5177;
-}
+/*:root {*/
+/*    --primary: #ff5722;*/
+/*    --primary_dark: #e64a19;*/
+/*    --accent: #ff5177;*/
+/*}*/
 /*:root {*/
 /*    --primario: #1976D2; !*Azul índigo*!*/
 /*    --secundario_fondo: #EEEEEE; !* Gris claro *!*/
@@ -10,12 +10,16 @@
 /*    --accento: #FF5722;  !* naranja *!*/
 /*}*/
 
-.bg-header {
-    background-color: var(--primary_dark);
-}
-body {
-    background-color: var(--primary);
-}
-.card-color{
-    background-color: var(--accent);
+/*.bg-header {*/
+/*    background-color: var(--primary_dark);*/
+/*}*/
+/*body {*/
+/*    background-color: var(--primary);*/
+/*}*/
+/*.card-color{*/
+/*    background-color: var(--accent);*/
+/*}*/
+.custom-header {
+    background-color: black;
+    color: white;
 }

@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<nav class="navbar navbar-expand-lg bg-light-gray">
-    <div class="container">
-        <h1 class="my-3 text-white">Articulos de CoderBlog:</h1>
+<nav class="navbar navbar-expand-lg custom-header w-100">
+    <div class="container-fluid">
+        <h1 class="my-3">Articulos de CoderBlog:</h1>
         <div aria-label="Ordenar por" class="btn-group" role="group">
             {% if articulos %}
             <a class="btn btn-primary mx-1" href="{% url 'articulo.list' %}?orden=title">Ordenar por Titulo</a>
