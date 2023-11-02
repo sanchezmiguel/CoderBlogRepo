@@ -16,16 +16,30 @@
     <div class="col-md-8">
         <h2>Chats</h2>
         {% for contacto, mensajes in messages_by_contact.items %}
-        <h2>Conversación con {{ contacto.username }}</h2>
-        <ul>
-            {% for mensaje in mensajes %}
-            <li>
-                <p>Remitente: {{ mensaje.remitente }}</p>
-                <p>Hora: {{ mensaje.hora }}</p>
-                <p>Mensaje: {{ mensaje.texto }}</p>
-            </li>
-            {% endfor %}
-        </ul>
+        <div class="card mb-2">
+            <div class="card bg-light">
+                <h2>Conversación con {{ contacto.username }}</h2>
+                <!--            <ul>-->
+                {% for mensaje in mensajes %}
+                <!--                <li>-->
+                <div class="card m-2">
+                    {% if mensaje.remitente == request.user.username %}
+                    <div class="card-body" style="text-align: right">
+                        <p>Remitente: {{ mensaje.remitente }} - Hora: {{ mensaje.hora }}</p>
+                        <p>Mensaje: {{ mensaje.texto }}</p>
+                    </div>
+                    {% else %}
+                    <div class="card-body" style="text-align: left">
+                        <p>Remitente: {{ mensaje.remitente }} - Hora: {{ mensaje.hora }}</p>
+                        <p>Mensaje: {{ mensaje.texto }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+                <!--                </li>-->
+                {% endfor %}
+                <!--            </ul>-->
+            </div>
+        </div>
         {% endfor %}
     </div>
 </div>
