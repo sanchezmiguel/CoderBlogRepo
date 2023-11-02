@@ -19,7 +19,11 @@
 /*.card-color{*/
 /*    background-color: var(--accent);*/
 /*}*/
+/*.custom-header {*/
+/*    background-color: black;*/
+/*    color: white;*/
+/*}*/
 .custom-header {
-    background-color: black;
+    background-color: #333333;
     color: white;
 }
