@@ -1,14 +1,15 @@
-#URLS de PERFILES APP
-from django.urls import path
+# URLS de PERFILES APP
 from django.conf import settings
 from django.conf.urls.static import static
+from django.urls import path
+
 from . import views
 
 urlpatterns = [
     # path('', views.HomeView.as_view(),name='home'),
-    path('login',views.LoginInterfaceView.as_view(),name='login'),
-    path('logout',views.LogoutInterfaceView.as_view(),name='logout'),
-    path('signup',views.SignupView.as_view(),name='signup'),
+    path('login', views.LoginInterfaceView.as_view(), name='login'),
+    path('logout', views.LogoutInterfaceView.as_view(), name='logout'),
+    path('signup', views.SignupView.as_view(), name='signup'),
     path('profile/', views.ProfileView.as_view(), name='profile'),
 ]
 

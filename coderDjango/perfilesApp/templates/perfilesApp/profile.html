@@ -5,7 +5,7 @@
     <h1 class="my-4">Mi Perfil</h1>
     <div class="card mb-4 card-color shadow-lg">
         <div class="card-body">
-            <form method="post" enctype="multipart/form-data" action="{% url 'profile' %}">
+            <form action="{% url 'profile' %}" enctype="multipart/form-data" method="post">
                 {% csrf_token %}
                 <div class="form-group">
                     {{ form.as_p }}
@@ -14,7 +14,7 @@
 
                     <p> {{user_profile.first_name}}</p>
                     {% if user_profile.avatar %}
-                        <img src="{{ user_profile.avatar.url }}" alt="Avatar" width="100">
+                    <img alt="Avatar" src="{{ user_profile.avatar.url }}" width="100">
                     {% endif %}
                 </div>
                 <button class="btn btn-primary" type="submit">Guardar Cambios</button>

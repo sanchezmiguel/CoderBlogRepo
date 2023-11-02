@@ -1,8 +1,9 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.db.models import Q
 from django.shortcuts import render, redirect
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
-from django.contrib.auth.models import User
+
 from .models import Chat, Message
 
 
@@ -96,7 +97,8 @@ class UserChatsView(LoginRequiredMixin, View):
         if selected_user:
             # Obtener el chat entre el usuario logueado y el usuario seleccionado
             user_chat = Chat.objects.filter(
-                (Q(usuario_1=request.user, usuario_2=selected_user) | Q(usuario_1=selected_user, usuario_2=request.user))
+                (Q(usuario_1=request.user, usuario_2=selected_user) | Q(usuario_1=selected_user,
+                                                                        usuario_2=request.user))
             ).first()
 
             if user_chat:

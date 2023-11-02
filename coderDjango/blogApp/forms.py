@@ -1,7 +1,7 @@
+from ckeditor.widgets import CKEditorWidget
 from django import forms
 
 from blogApp.models import Articulo
-from ckeditor.widgets import CKEditorWidget
 
 
 class ArticuloForm(forms.ModelForm):

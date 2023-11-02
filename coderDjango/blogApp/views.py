@@ -1,15 +1,15 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic import ListView
 from django.views.generic.edit import DeleteView
 
 from blogApp.forms import ArticuloForm
+from .forms import CardSearchForm
+from .models import Articulo
+
 
 # Create your views here.
-
-from django.views.generic import ListView
-from .models import Articulo
-from .forms import CardSearchForm
 
 
 class ArticuloListView(ListView):
@@ -35,7 +35,6 @@ class ArticuloListView(ListView):
 
         # Filter based on the search_text
         if search_text:
-            # queryset = queryset.filter(text__icontains=search_text)
             queryset = queryset.filter(
                 Q(title__icontains=search_text) |
                 Q(subtitle__icontains=search_text) |
@@ -55,7 +54,7 @@ class ArticuloListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form'] = CardSearchForm(self.request.GET)  # Pass the search form to the context
+        context['form'] = CardSearchForm(self.request.GET)
         return context
 
 
@@ -70,7 +69,7 @@ class ArticuloCreateView(LoginRequiredMixin, CreateView):
     form_class = ArticuloForm
 
     def form_valid(self, form):
-        form.instance.author = self.request.user  # Asigna el autor al usuario actual
+        form.instance.author = self.request.user
         return super().form_valid(form)
 
 

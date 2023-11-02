@@ -1,20 +1,19 @@
-from django.contrib.auth.views import LoginView, LogoutView
-from django.db import IntegrityError
-from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.views.generic.edit import UpdateView
-from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import UserProfileForm
-
-from perfilesApp.models import CreatorProfile, UserProfile
-
-
 # Create your views here.
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView, LogoutView
+from django.db import IntegrityError
 from django.shortcuts import redirect
+from django.shortcuts import render
 from django.views.generic.edit import CreateView
+from django.views.generic.edit import UpdateView
+
+from perfilesApp.models import CreatorProfile
 from perfilesApp.models import UserProfile
+from .forms import UserProfileForm
+
 
 class SignupView(CreateView):
     form_class = UserCreationForm
@@ -90,7 +89,8 @@ class ProfileView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        messages.error(self.request, 'Hubo un error en la actualización de tu perfil. Por favor, verifica los datos ingresados.')
+        messages.error(self.request,
+                       'Hubo un error en la actualización de tu perfil. Por favor, verifica los datos ingresados.')
         return super().form_invalid(form)
 
     def get_object(self, queryset=None):

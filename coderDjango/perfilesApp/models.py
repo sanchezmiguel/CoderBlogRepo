@@ -14,9 +14,10 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
+
 class CreatorProfile(models.Model):
-    name = models.CharField(max_length=100,unique=True)
-    position=models.CharField(max_length=100,default="")
+    name = models.CharField(max_length=100, unique=True)
+    position = models.CharField(max_length=100, default="")
     bio = models.TextField()
     email = models.EmailField()
     image = models.ImageField(upload_to='creator_images', blank=True, null=True)
