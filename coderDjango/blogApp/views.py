@@ -1,29 +1,42 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
-from django.views.generic import CreateView, ListView, DetailView, UpdateView
-from django.views.generic.edit import DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic.edit import DeleteView
 
 from blogApp.forms import ArticuloForm
-from blogApp.models import Articulo
-
 
 # Create your views here.
+
+from django.views.generic import ListView
+from .models import Articulo
+from .forms import CardSearchForm
 
 
 class ArticuloListView(ListView):
     model = Articulo
     context_object_name = 'articulos'
-    # template_name = 'tu_template.html'
+    template_name = 'blogApp/articulo_list.html'
 
     def get_queryset(self):
-        # Obtén el valor del parámetro 'orden' de la URL
+        # Obtain the value of the 'orden' parameter from the URL
         orden = self.request.GET.get('orden')
 
-        # Define la consulta base sin ordenamiento
+        # Create an instance of the CardSearchForm
+        search_form = CardSearchForm(self.request.GET)
+
+        # Check if the form is valid
+        if search_form.is_valid():
+            search_text = search_form.cleaned_data.get('search_text')
+        else:
+            search_text = None
+
+        # Define the base queryset without ordering
         queryset = Articulo.objects.all()
 
-        # Verifica el valor de 'orden' y ordena los artículos en consecuencia
+        # Filter based on the search_text
+        if search_text:
+            queryset = queryset.filter(text__icontains=search_text)
+
+        # Check the value of 'orden' and order the articles accordingly
         if orden == 'title':
             queryset = queryset.order_by('title')
         elif orden == 'author':
@@ -32,6 +45,11 @@ class ArticuloListView(ListView):
             queryset = queryset.order_by('created')
 
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = CardSearchForm(self.request.GET)  # Pass the search form to the context
+        return context
 
 
 class ArticuloDetailView(DetailView):

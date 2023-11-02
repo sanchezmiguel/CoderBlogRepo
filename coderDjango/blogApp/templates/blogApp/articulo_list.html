@@ -4,9 +4,17 @@
 <nav class="navbar navbar-expand-xxl custom-header w-100 shadow-lg">
     <div class="container-fluid">
         <h1 class="my-3">Artículos:</h1>
+        <div>
+            <form action="{% url 'articulo.list' %}" class="form-inline" method="get" style="display: inline-block;">
+                <div>
+                    {{ form.search_text }}
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+            </form>
+        </div>
         <div aria-label="Ordenar por" class="btn-group" role="group">
             {% if articulos %}
-            <a class="btn btn-primary mx-1" href="{% url 'articulo.list' %}?orden=title">Ordenar por Titulo</a>
+            <a class="btn btn-primary mx-1" href="{% url 'articulo.list' %}?orden=title">Ordenar por Título</a>
             <a class="btn btn-primary mx-1" href="{% url 'articulo.list' %}?orden=author">Ordenar por Autor</a>
             <a class="btn btn-primary mx-1" href="{% url 'articulo.list' %}?orden=created">Ordenar por Fecha</a>
             {% endif %}
@@ -18,7 +26,6 @@
         {% if articulos %}
         {% for articulo in articulos %}
         <div class="col-md-4">
-
             <div class="card mb-4 card-color shadow-lg">
                 {% if articulo.image %}
                 <img alt="{{ articulo.title }}" class="card-img-top" src="{{ articulo.image.url }}">
