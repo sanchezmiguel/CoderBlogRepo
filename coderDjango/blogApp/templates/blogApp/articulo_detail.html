@@ -10,8 +10,12 @@
     <div class="my-5 ckeditor">
         <p class="my-5"> {{articulo.text|safe}} </p>
     </div>
-    <p>Author: {{articulo.author.username}}</p>
-    <p>Published on: {{articulo.created}}</p>
+
+    <div class="card-footer">
+        <i class="fas fa-user"></i> {{articulo.author.username}}
+        <i class="fas fa-calendar"></i> {{articulo.created}}
+
+    </div>
 </div>
 
 <div class="container mt-3">

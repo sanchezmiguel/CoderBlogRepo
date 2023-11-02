@@ -14,7 +14,7 @@ from blogApp.models import Articulo
 class ArticuloListView(ListView):
     model = Articulo
     context_object_name = 'articulos'
-    template_name = 'tu_template.html'
+    # template_name = 'tu_template.html'
 
     def get_queryset(self):
         # Obtén el valor del parámetro 'orden' de la URL
