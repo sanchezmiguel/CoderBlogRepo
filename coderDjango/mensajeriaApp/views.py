@@ -44,13 +44,38 @@ class MessagesView(LoginRequiredMixin, View):
         # Obtener todos los chats en los que el usuario está involucrado
         user_chats = Chat.objects.filter(usuario_1=request.user) | Chat.objects.filter(usuario_2=request.user)
 
-        # Obtener todos los mensajes de esos chats
-        messages = Message.objects.filter(chat__in=user_chats)
+        # Crear un diccionario para almacenar los mensajes de cada contacto
+        messages_by_contact = {}
+
+        for chat in user_chats:
+            # Determinar el usuario con el que se está chateando
+            if chat.usuario_1 == request.user:
+                contact = chat.usuario_2
+            else:
+                contact = chat.usuario_1
+
+            # Obtener todos los mensajes de ese chat
+            messages = Message.objects.filter(chat=chat)
+
+            # Crear una lista de mensajes con las propiedades especificadas
+            message_list = []
+            for message in messages:
+                message_data = {
+                    'remitente': message.chat.usuario_1.username,
+                    'hora': message.fecha_creacion,
+                    'texto': message.texto,
+                }
+                message_list.append(message_data)
+
+            # Agregar la lista de mensajes al diccionario messages_by_contact
+            if contact not in messages_by_contact:
+                messages_by_contact[contact] = message_list
+            else:
+                messages_by_contact[contact].extend(message_list)
 
         context = {
             'all_users': all_users,
-            'user_chats': user_chats,
-            'messages': messages
+            'messages_by_contact': messages_by_contact,
         }
 
         return render(request, 'mensajeriaApp/messages.html', context)
