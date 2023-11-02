@@ -38,8 +38,8 @@ class MessagesView(LoginRequiredMixin, View):
     success_url = '/pages'
 
     def get(self, request):
-        # Obtener todos los usuarios
-        all_users = User.objects.all()
+        # Obtener todos los usuarios excepto request.user
+        all_users = User.objects.exclude(username=request.user.username)
 
         # Obtener todos los chats en los que el usuario está involucrado
         user_chats = Chat.objects.filter(usuario_1=request.user) | Chat.objects.filter(usuario_2=request.user)
