@@ -23,3 +23,6 @@ class CreatorProfile(models.Model):
     image = models.ImageField(upload_to='creator_images', blank=True, null=True)
     linkedin = models.URLField(max_length=200, blank=True, null=True)
     github = models.URLField(max_length=200, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
