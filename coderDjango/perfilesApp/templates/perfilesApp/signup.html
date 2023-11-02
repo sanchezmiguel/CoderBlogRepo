@@ -1,10 +1,45 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<h2>Formulario de Registro de CoderBlog</h2>
 
-<form method='POST' style="text-align: left; margin: 0 auto; width: 600px; "> {% csrf_token %}
-    {{form.as_p}}
-    <input class="btn btn-secondary" name="Submit" type="submit"/>
+<form method='POST' style="text-align: left; margin: 0 auto; width: 600px; ">
+    {% csrf_token %}
 
+    <div class="margen-inferior">
+        <label for="id_username">Nombre de usuario:</label>
+        {{ form.username }}
+    </div>
+
+    <div class="margen-inferior">
+        <small>Requerido. Máximo 150 caracteres. Solo letras, dígitos y @/./+/-/_.</small>
+    </div>
+
+    <div class="margen-inferior">
+        <label for="id_email">Correo electrónico:</label>
+        {{ form.email }}
+    </div>
+
+    <div class="margen-inferior">
+        <label for="id_password1">Contraseña:</label>
+        {{ form.password1 }}
+        <ul>
+            <li>No debe ser demasiado similar a tu información personal.</li>
+            <li>Debe contener al menos 8 caracteres.</li>
+            <li>No debe ser una contraseña comúnmente utilizada.</li>
+            <li>No debe ser completamente numérica.</li>
+        </ul>
+    </div>
+
+    <div class="margen-inferior">
+        <label for="id_password2">Confirmar contraseña:</label>
+        {{ form.password2 }}
+    </div>
+
+    <div class="margen-inferior">
+        <small>Ingresa la misma contraseña que ingresaste antes para verificar.</small>
+    </div>
+
+    <input class="btn btn-secondary" name="Submit" type="submit" value="Registrarse"/>
 </form>
 {% endblock %}

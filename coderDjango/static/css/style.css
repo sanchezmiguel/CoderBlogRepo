@@ -27,6 +27,15 @@
     background-color: #333333;
     color: white;
 }
+
+.margen-inferior {
+    margin-bottom: 10px;
+}
+
+.texto-derecha {
+    text-align: right;
+}
+
 /*.custom-body {*/
 /*    background-image: url('coderDjango/media/articulo_imagenes/audiobooks.png');*/
 /*    background-size: cover; !* Ajustar el tamaño de la imagen para cubrir todo el fondo *!*/
