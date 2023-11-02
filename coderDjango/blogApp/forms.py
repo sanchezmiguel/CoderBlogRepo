@@ -15,6 +15,8 @@ class ArticuloForm(forms.ModelForm):
             'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
         labels = {
-            'text': 'Write your thoughts here:',
-            'image': 'Upload an image',
+            'title':'Título',
+            'subtitle':'Subtítulo',
+            'text':'Texto del artículo',
+            'image': 'Imagen',
         }
