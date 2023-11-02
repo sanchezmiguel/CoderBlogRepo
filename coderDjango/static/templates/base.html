@@ -15,9 +15,9 @@
 <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid d-flex align-items-center">
         {% if user.is_authenticated %}
-    <h1 class="text-light me-3">Bienvenido a CoderBlog {{ user.username }}</h1>
+        <h1 class="text-light me-3">Bienvenido a CoderBlog {{ user.username }}</h1>
         {% else %}
-         <h1 class="text-light me-3">Bienvenido a CoderBlog</h1>
+        <h1 class="text-light me-3">Bienvenido a CoderBlog</h1>
         {% endif %}
         <div class="ms-auto">
             <a class="btn btn-outline-light me-1" href="{% url 'articulo.list' %}">Home</a>

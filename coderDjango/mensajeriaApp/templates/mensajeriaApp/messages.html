@@ -5,16 +5,16 @@
 {% block content %}
 <div class="row">
     <div class="col-md-4">
-        <h2>Usuarios</h2>
-        <select id="userSelect">
-            <option value="">Selecciona un usuario</option>
+        <h2>Mandar mensaje:</h2>
+        <select class="selectpicker" data-live-search="true" data-size="5" id="userSelect">
+            <option data-tokens="" value="">Selecciona un contacto</option>
             {% for user in all_users %}
-            <option value="{{ user.id }}">{{ user.username }}</option>
+            <option data-tokens="{{ user.username }}" value="{{ user.id }}">{{ user.username }}</option>
             {% endfor %}
         </select>
     </div>
     <div class="col-md-8">
-        <h2>Chats</h2>
+        <h2>Historial de mensajes</h2>
         {% for contacto, mensajes in messages_by_contact.items %}
         <div class="card mb-2">
             <div class="card bg-light">

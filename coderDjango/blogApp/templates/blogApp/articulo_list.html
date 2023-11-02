@@ -1,11 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!--<nav class="navbar navbar-expand-lg custom-header w-100">-->
-<!--<nav class="navbar navbar-expand-lg navbar-dark bg-dark custom-header w-100 shadow">-->
 <nav class="navbar navbar-expand-xxl custom-header w-100 shadow-lg">
     <div class="container-fluid">
-        <h1 class="my-3">Articulos:</h1>
+        <h1 class="my-3">Artículos:</h1>
         <div aria-label="Ordenar por" class="btn-group" role="group">
             {% if articulos %}
             <a class="btn btn-primary mx-1" href="{% url 'articulo.list' %}?orden=title">Ordenar por Titulo</a>
@@ -25,8 +23,6 @@
             <div class="card mb-4 card-color shadow-lg">
                 {% if articulo.image %}
                 <img alt="{{ articulo.title }}" class="card-img-top" src="{{ articulo.image.url }}">
-                {% else %}
-                <img alt="{{ articulo.title }}" class="card-img-top">
                 {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{ articulo.title }}</h5>
