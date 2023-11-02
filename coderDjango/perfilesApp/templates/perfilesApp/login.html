@@ -1,23 +1,46 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<form class="form-signin" method='post'>
+<h2>Formulario de Inicio de Sesión de CoderBlog</h2>
+
+<style>
+    input[type="text"], input[type="password"] {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .btn-login {
+        padding: 15px 40px;
+    }
+</style>
+
+<form class="form-signin" method="post" style="text-align: left; margin: 0 auto; width: 600px; ">
     {% csrf_token %}
-    <h1 class="h3 mb-3 font-weight-normal">CoderBlog</h1>
-    <img alt="" class="mb-4">
-    <h1 class="h3 mb-3 font-weight-normal">Por favor, inicia sesión</h1>
-    <p>{{ form.username.label_tag }}
-        {{ form.username }}
-    </p>
-    <p>
-        {{ form.password.label_tag }}
-        {{ form.password }}
-    </p>
-    <div class="checkbox mb-3">
-        {{ form.remember.label_tag }}
-        {{ form.remember }}
+    <div class="card">
+        <div class="card-body">
+            <p>{{ form.username.label_tag }}
+                {{ form.username }}
+            </p>
+            <p>
+                {{ form.password.label_tag }}
+                {{ form.password }}
+            </p>
+
+            <div class="checkbox mb-3">
+                {{ form.remember.label_tag }}
+                {{ form.remember }}
+            </div>
+
+            <div class="margen-inferior text-center">
+            <button class="btn btn-lg btn-primary btn-block btn-login" type="submit">Iniciar Sesión</button>
+                 </div>
+            <p class="mt-5 mb-3 text-muted">© 2023</p>
+        </div>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Inicia sesión</button>
-    <p class="mt-5 mb-3 text-muted">© 2023</p>
 </form>
 {% endblock %}
