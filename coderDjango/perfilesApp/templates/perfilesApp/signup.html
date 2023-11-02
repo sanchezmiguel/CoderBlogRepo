@@ -4,7 +4,7 @@
 <h2>Formulario de Registro de CoderBlog</h2>
 
 <style>
-    input[type="text"], input[type="password"], input[type="email"] {
+    input[type="text"], input[type="password"] {
         width: 100%;
         box-sizing: border-box;
         padding: 12px 20px;
@@ -17,6 +17,10 @@
     .margen-inferior {
         text-align: left;
     }
+
+    .btn-register {
+        padding: 15px 40px;
+    }
 </style>
 
 <form method='POST' style="text-align: left; margin: 0 auto; width: 600px; ">
@@ -26,17 +30,6 @@
             <div class="margen-inferior">
                 <label for="id_username">Nombre de usuario:</label>
                 {{ form.username }}
-            </div>
-
-            <div class="margen-inferior">
-                <ul>
-                    <li><small>Requerido. Máximo 150 caracteres. Solo letras, dígitos y @/./+/-/_.</small></li>
-                </ul>
-            </div>
-
-            <div class="margen-inferior">
-                <label for="id_email">Correo electrónico:</label>
-                {{ form.email }}
             </div>
 
             <div class="margen-inferior">
@@ -62,9 +55,9 @@
                     </li>
                 </ul>
             </div>
-
-            <input class="btn btn-secondary" name="Submit" type="submit" value="Registrarse"/>
-
+            <div class="margen-inferior text-center">
+                <input class="btn btn-secondary btn-register" name="Submit" type="submit" value="Registrarse"/>
+            </div>
         </div>
 
     </div>
