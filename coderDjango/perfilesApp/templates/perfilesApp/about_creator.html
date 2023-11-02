@@ -2,46 +2,46 @@
 {% load static %}
 {% block content %}
 <h1>Sobre Mí</h1>
-
-<div class="card">
-    <div class="card-body">
-        <h5 class="card-title">Información personal</h5>
-        <div class="d-flex">
-            <div class="col-md-3">
-                {% if profile.image %}
-                <img alt="{{ profile.name }}" class="img-fluid rounded-circle" src="{{ profile.image.url }}">
-                {% else %}
-                <img alt="Avatar por defecto" class="img-fluid rounded-circle"
-                     src="{% static 'images/default-avatar.jpg' %}">
-                {% endif %}
-            </div>
-            <div class="col-md-9 ms-md-3 text-md-start">
-                <p><b>Nombre:</b> {{ profile.name }}</p>
-                <p><b>Correo electrónico:</b> {{ profile.email }}</p>
-                <p><b>LinkedIn:</b> <a href="{{ profile.linkedin }}" target="_blank">{{ profile.linkedin }}</a></p>
-                <p><b>GitHub:</b> <a href="{{ profile.github }}" target="_blank">{{ profile.github }}</a></p>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="mt-4">
+<div class="container mx-auto" style="max-width: 800px;">
     <div class="card">
-        <h2>Experiencia Laboral</h2>
-
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Posición</h5>
-                <p class="card-text">{{ profile.position }}</p>
+        <div class="card-body">
+            <h5 class="card-title">Información personal</h5>
+            <div class="d-flex">
+                <div class="col-md-3">
+                    {% if profile.image %}
+                    <img alt="{{ profile.name }}" class="img-fluid rounded-circle" src="{{ profile.image.url }}">
+                    {% else %}
+                    <img alt="Avatar por defecto" class="img-fluid rounded-circle"
+                         src="{% static 'images/default-avatar.jpg' %}">
+                    {% endif %}
+                </div>
+                <div class="col-md-9 ms-md-3 text-md-start">
+                    <p><b>Nombre:</b> {{ profile.name }}</p>
+                    <p><b>Correo electrónico:</b> {{ profile.email }}</p>
+                    <p><b>LinkedIn:</b> <a href="{{ profile.linkedin }}" target="_blank">{{ profile.linkedin }}</a></p>
+                    <p><b>GitHub:</b> <a href="{{ profile.github }}" target="_blank">{{ profile.github }}</a></p>
+                </div>
             </div>
         </div>
-
+    </div>
+    <div class="mt-4">
         <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Biografía</h5>
-                <p class="card-text text-start">{{ profile.bio }}</p>
+            <h2>Experiencia Laboral</h2>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Posición</h5>
+                    <p class="card-text">{{ profile.position }}</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Biografía</h5>
+                    <p class="card-text text-start">{{ profile.bio }}</p>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 {% endblock %}
