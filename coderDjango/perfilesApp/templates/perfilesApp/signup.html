@@ -3,26 +3,6 @@
 {% block content %}
 <h2>Formulario de Registro de CoderBlog</h2>
 
-<style>
-    input[type="text"], input[type="password"] {
-        width: 100%;
-        box-sizing: border-box;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
-
-    .margen-inferior {
-        text-align: left;
-    }
-
-    .btn-register {
-        padding: 15px 40px;
-    }
-</style>
-
 <form method='POST' style="text-align: left; margin: 0 auto; width: 600px; ">
     {% csrf_token %}
     <div class="card">

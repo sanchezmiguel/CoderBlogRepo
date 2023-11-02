@@ -1,44 +1,24 @@
-/*:root {*/
-/*    --primary: #ff5722;*/
-/*    --primary_dark: #e64a19;*/
-/*    --accent: #ff5177;*/
-/*}*/
-/*:root {*/
-/*    --primario: #1976D2; !*Azul índigo*!*/
-/*    --secundario_fondo: #EEEEEE; !* Gris claro *!*/
-/*    --secundario_interactivo:#03A9F4; !* Azul claro *!*/
-/*    --accento: #FF5722;  !* naranja *!*/
-/*}*/
 
-/*.bg-header {*/
-/*    background-color: var(--primary_dark);*/
-/*}*/
-/*body {*/
-/*    background-color: var(--primary);*/
-/*}*/
-/*.card-color{*/
-/*    background-color: var(--accent);*/
-/*}*/
-/*.custom-header {*/
-/*    background-color: black;*/
-/*    color: white;*/
-/*}*/
 .custom-header {
     background-color: #333333;
     color: white;
 }
 
-/*.margen-inferior {*/
-/*    margin-bottom: 10px;*/
-/*}*/
+/* Estilos para formularios */
+input[type="text"], input[type="password"], input[type="email"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
 
-/*.texto-derecha {*/
-/*    text-align: right;*/
-/*}*/
+.margen-inferior {
+    text-align: left;
+}
 
-/*.custom-body {*/
-/*    background-image: url('coderDjango/media/articulo_imagenes/audiobooks.png');*/
-/*    background-size: cover; !* Ajustar el tamaño de la imagen para cubrir todo el fondo *!*/
-/*    background-repeat: no-repeat; !* Evitar la repetición de la imagen *!*/
-/*    background-attachment: fixed; !* Fijar la imagen en su lugar mientras se desplaza *!*/
-/*}*/
+.btn-register, .btn-login {
+    padding: 15px 40px;
+}
