@@ -5,7 +5,7 @@
     {% csrf_token %}
     <h1 class="h3 mb-3 font-weight-normal">CoderBlog</h1>
     <img alt="" class="mb-4">
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <h1 class="h3 mb-3 font-weight-normal">Por favor, inicia sesión</h1>
     <p>{{ form.username.label_tag }}
         {{ form.username }}
     </p>
@@ -17,7 +17,7 @@
         {{ form.remember.label_tag }}
         {{ form.remember }}
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Inicia sesión</button>
     <p class="mt-5 mb-3 text-muted">© 2023</p>
 </form>
 {% endblock %}
