@@ -28,12 +28,17 @@
         <div class="col-md-4">
             <div class="card mb-4 card-color shadow-lg">
                 {% if articulo.image %}
-                <img alt="{{ articulo.title }}" class="card-img-top" src="{{ articulo.image.url }}">
+                <!--                <img alt="{{ articulo.title }}" class="card-img-top" src="{{ articulo.image.url }}" width="100" height="100">-->
+                <img alt="{{ articulo.title }}" class="card-img-top mx-auto" src="{{ articulo.image.url }}"
+                     style="max-height: 200px;">
+
                 {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{ articulo.title }}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{{ articulo.subtitle }}</h6>
-                    <p class="card-text">{{ articulo.text|safe|truncatechars:150 }}</p>
+<!--                    <h6 class="card-subtitle mb-2 text-muted">{{ articulo.subtitle }}</h6>-->
+                    <h6 class="card-subtitle mb-2 text-muted" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-height: 1.2em;">{{ articulo.subtitle }}</h6>
+
+<!--                    <p class="card-text">{{ articulo.text|safe|truncatechars:150 }}</p>-->
                     <div class="card-footer">
                         <i class="fas fa-user"></i> {{articulo.author}}
                         <i class="fas fa-calendar"></i> {{articulo.created|date:"Y-m-d" }}
