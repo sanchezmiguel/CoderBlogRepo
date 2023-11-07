@@ -1,13 +1,15 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
-from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic import CreateView, UpdateView
+from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic.edit import DeleteView
 
 from blogApp.forms import ArticuloForm
 from .forms import CardSearchForm
 from .models import Articulo
+from .models import Resena, Guia, Noticia, Entrevista, Tutorial
 
 
 # Create your views here.
@@ -92,3 +94,33 @@ class ArticuloDeleteView(LoginRequiredMixin, DeleteView):
     success_message = "Articulo de blog eliminado exitosamente!"
     success_url = '/pages'
     template_name = 'blogApp/articulo_delete.html'
+
+
+class ResenaDetailView(DetailView):
+    model = Resena
+    context_object_name = 'resena'
+    template_name = 'resena_detail.html'
+
+
+class GuiaDetailView(DetailView):
+    model = Guia
+    context_object_name = 'guia'
+    template_name = 'guia_detail.html'
+
+
+class NoticiaDetailView(DetailView):
+    model = Noticia
+    context_object_name = 'noticia'
+    template_name = 'noticia_detail.html'
+
+
+class EntrevistaDetailView(DetailView):
+    model = Entrevista
+    context_object_name = 'entrevista'
+    template_name = 'entrevista_detail.html'
+
+
+class TutorialDetailView(DetailView):
+    model = Tutorial
+    context_object_name = 'tutorial'
+    template_name = 'tutorial_detail.html'

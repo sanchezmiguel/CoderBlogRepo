@@ -26,5 +26,8 @@
             <a class="btn btn-danger" href="{% url 'articulo.delete' pk=articulo.id %}">Eliminar</a>
         </div>
     </div>
+
+    {% block extra_articulo %}
+    {% endblock %}
 </div>
 {% endblock %}

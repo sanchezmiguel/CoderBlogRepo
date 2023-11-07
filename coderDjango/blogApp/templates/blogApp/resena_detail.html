@@ -1,0 +1,7 @@
+{% extends 'articulo_detail.html' %}
+
+{% block extra_articulo %}
+    <p class="my-3">Puntuación: {{resena.score}}</p>
+    <p class="my-3">Fecha de reseña: {{resena.review_date}}</p>
+    <p class="my-3">Autor de la reseña: {{resena.reviewer}}</p>
+{% endblock %}
