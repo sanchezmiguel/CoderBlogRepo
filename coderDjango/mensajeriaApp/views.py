@@ -10,6 +10,7 @@ from .models import Chat, Message
 class EnviarMensajeView(LoginRequiredMixin, View):
     model = Message
     success_url = '/pages'
+    success_message = "Mensaje enviado exitosamente!"
 
     def post(self, request):
         # Obtén el ID del receptor y el mensaje del formulario

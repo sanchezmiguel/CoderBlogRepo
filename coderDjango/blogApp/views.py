@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.views.generic import CreateView, DetailView, UpdateView
@@ -66,6 +67,7 @@ class ArticuloDetailView(DetailView):
 class ArticuloCreateView(LoginRequiredMixin, CreateView):
     model = Articulo
     success_url = '/pages'
+    success_message = "Articulo de blog creado exitosamente!"
     form_class = ArticuloForm
 
     def form_valid(self, form):
@@ -76,10 +78,17 @@ class ArticuloCreateView(LoginRequiredMixin, CreateView):
 class ArticuloUpdateView(LoginRequiredMixin, UpdateView):
     model = Articulo
     success_url = '/pages'
+    success_message = "Articulo de blog actualizado exitosamente!"
     form_class = ArticuloForm
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        messages.success(self.request, 'Articulo de blog actualizado exitosamente!')
+        return super().form_valid(form)
 
 
 class ArticuloDeleteView(LoginRequiredMixin, DeleteView):
     model = Articulo
+    success_message = "Articulo de blog eliminado exitosamente!"
     success_url = '/pages'
     template_name = 'blogApp/articulo_delete.html'
