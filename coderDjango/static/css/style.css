@@ -22,3 +22,7 @@ input[type="text"], input[type="password"], input[type="email"] {
 .btn-register, .btn-login {
     padding: 15px 40px;
 }
+
+.django-ckeditor-widget {
+    width: 100%;
+}

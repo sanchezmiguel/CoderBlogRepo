@@ -4,33 +4,33 @@
 
 {% block content %}
 
-<div class="container mx-auto" style="max-width: 800px;">
-    <div class="card shadow-lg">
-        <div class="card-body">
-            <h2>Enviar mensaje a: {{ selected_user.username }}</h2>
+    <div class="container mx-auto" style="max-width: 800px;">
+        <div class="card shadow-lg">
+            <div class="card-body">
+                <h2>Enviar mensaje a: {{ selected_user.username }}</h2>
 
-            {% if selected_user %}
-            <div class="user-info">
-                <strong>Nombre de usuario:</strong> {{ selected_user.username }}
-                <br>
-                <strong>Correo electrónico:</strong> {{ selected_user.email }}
+                {% if selected_user %}
+                    <div class="user-info">
+                        <strong>Nombre de usuario:</strong> {{ selected_user.username }}
+                        <br>
+                        <strong>Correo electrónico:</strong> {{ selected_user.email }}
+                    </div>
+
+                    <hr>
+                    <h3>Texto del mensaje:</h3>
+                    <form action="{% url 'enviar_mensaje' %}" method="post">
+                        {% csrf_token %}
+                        <input name="receptor" type="hidden" value="{{ selected_user.id }}">
+                        <textarea cols="50" name="mensaje" required rows="4"></textarea>
+                        <br>
+                        <input type="submit" value="Enviar mensaje">
+                    </form>
+                    <br>
+                    <a class="btn btn-primary" href="{% url 'messages' %}">Volver a Messages</a>
+                {% else %}
+                    <p>El usuario seleccionado no existe.</p>
+                {% endif %}
             </div>
-
-            <hr>
-            <h3>Texto del mensaje:</h3>
-            <form action="{% url 'enviar_mensaje' %}" method="post">
-                {% csrf_token %}
-                <input name="receptor" type="hidden" value="{{ selected_user.id }}">
-                <textarea cols="50" name="mensaje" required rows="4"></textarea>
-                <br>
-                <input type="submit" value="Enviar mensaje">
-            </form>
-            <br>
-            <a class="btn btn-primary" href="{% url 'messages' %}">Volver a Messages</a>
-            {% else %}
-            <p>El usuario seleccionado no existe.</p>
-            {% endif %}
         </div>
     </div>
-</div>
 {% endblock %}
