@@ -21,9 +21,17 @@
         </div>
 
         <div class="container mt-3 mb-3">
-            <a class="btn btn-secondary" href="{% url 'articulo.list' %}">Volver</a>
-            <a class="btn btn-secondary" href="{% url 'articulo.update' pk=articulo.id %}">Editar</a>
-            <a class="btn btn-danger" href="{% url 'articulo.delete' pk=articulo.id %}">Eliminar</a>
+            <a class="btn btn-secondary" href="{% url 'articulo.list' %}">
+                <i class="bi bi-arrow-left"></i> Volver
+            </a>
+
+            <a class="btn btn-secondary" href="{% url 'articulo.update' pk=articulo.id %}">
+                <i class="bi bi-pencil"></i> Editar
+            </a>
+
+            <a class="btn btn-danger" href="{% url 'articulo.delete' pk=articulo.id %}">
+                <i class="bi bi-trash"></i> Eliminar
+            </a>
         </div>
     </div>
 </div>

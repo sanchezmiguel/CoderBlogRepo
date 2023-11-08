@@ -11,7 +11,9 @@
     <script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}" type="text/javascript"></script>
     <script src="{% static 'ckeditor/ckeditor-init.js' %}" type="text/javascript"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
-        <script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
+
+    <script>
         window.addEventListener('load', function () {
             var successMessages = document.querySelectorAll('.alert-success');
             successMessages.forEach(function (successMessage) {
@@ -32,16 +34,20 @@
         {% endif %}
 
         <div class="ms-auto">
-            <a class="btn btn-outline-light me-1" href="{% url 'articulo.list' %}">Home</a>
-            <a class="btn btn-outline-light me-1" href="{% url 'about_creator' %}">About</a>
+            <a class="btn btn-outline-light me-1" href="{% url 'articulo.list' %}"><i class="fas fa-home"></i> Home</a>
+            <a class="btn btn-outline-light me-1" href="{% url 'about_creator' %}"><i class="fas fa-info-circle"></i>
+                About</a>
             {% if user.is_authenticated %}
-            <a class="btn btn-outline-light me-1" href="{% url 'articulo.new' %}">Create New blog</a>
-            <a class="btn btn-outline-light me-1" href="{% url 'messages' %}">Messages</a>
-            <a class="btn btn-outline-light me-1" href="{% url 'profile' %}">My Profile</a>
-            <a class="btn btn-outline-light me-1" href="{% url 'logout' %}">Logout</a>
+            <a class="btn btn-outline-light me-1" href="{% url 'articulo.new' %}"><i class="fas fa-plus-circle"></i>
+                Create New blog</a>
+            <a class="btn btn-outline-light me-1" href="{% url 'messages' %}"><i class="fas fa-envelope"></i>
+                Messages</a>
+            <a class="btn btn-outline-light me-1" href="{% url 'profile' %}"><i class="fas fa-user"></i> My Profile</a>
+            <a class="btn btn-outline-light me-1" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>
+                Logout</a>
             {% else %}
-            <a class="btn btn-outline-light me-1" href="{% url 'login' %}">Login</a>
-            <a class="btn btn-outline-light me-1" href="{% url 'signup' %}">Signup</a>
+            <a class="btn btn-outline-light me-1" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Login</a>
+            <a class="btn btn-outline-light me-1" href="{% url 'signup' %}"><i class="fas fa-user-plus"></i> Signup</a>
             {% endif %}
         </div>
     </div>
@@ -49,15 +55,15 @@
 
 
 <div class="my-5 text-center container-fluid">
-        {% if messages %}
-            <div class="alert alert-success">
-                <ul class="messages">
-                    {% for message in messages %}
-                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
+    {% if messages %}
+    <div class="alert alert-success">
+        <ul class="messages">
+            {% for message in messages %}
+            <li %} %} class="{{ message.tags }}" endif if message.tags {% {%>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
     {% block content %}
     {% endblock %}
 </div>
