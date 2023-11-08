@@ -13,7 +13,7 @@ urlpatterns = [
     path('logout', views.LogoutInterfaceView.as_view(), name='logout'),
     path('signup', views.SignupView.as_view(), name='signup'),
     path('profile/', views.ProfileView.as_view(), name='profile'),
-    path('cambiar-contrasena/', login_required(PasswordChangeView.as_view()), name='cambiar-contrasena'),
+    path('cambiar-contrasena/', login_required(PasswordChangeView.as_view(template_name='perfilesApp/password_change.html')), name='cambiar-contrasena'),
 
 ]
 
