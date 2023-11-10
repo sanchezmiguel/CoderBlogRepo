@@ -1,38 +1,39 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container mx-auto" style="max-width: 1600px;">
-    <div class="card shadow-lg mb-3">
-        <div class="border round">
-            <h1 class="my-5">{{articulo.title}} </h1>
-            <h2 class="my-5">{{articulo.subtitle}} </h2>
-            {% if articulo.image %}
-            <img alt="{{ articulo.title }} Image" class="img-fluid" src="{{ articulo.image.url }}">
-            {% endif %}
-            <div class="my-5 ckeditor">
-                <p class="my-5"> {{articulo.text|safe}} </p>
+    <div class="container mx-auto" style="max-width: 1600px;">
+        <div class="card shadow-lg mb-3">
+            <div class="border round">
+                <h1 class="my-5">{{ articulo.title }} </h1>
+                <h2 class="my-5">{{ articulo.subtitle }} </h2>
+                {% if articulo.image %}
+                    <img alt="{{ articulo.title }} Image" class="img-fluid" src="{{ articulo.image.url }}">
+                {% endif %}
+                <div class="my-5 ckeditor">
+                    <p class="my-5"> {{ articulo.text|safe }} </p>
+                </div>
+
+                <div class="card-footer">
+                    <i class="fas fa-user"></i> {{ articulo.author.username }}
+                    <i class="fas fa-calendar"></i> {{ articulo.created }}
+
+                </div>
             </div>
 
-            <div class="card-footer">
-                <i class="fas fa-user"></i> {{articulo.author.username}}
-                <i class="fas fa-calendar"></i> {{articulo.created}}
+            <div class="container mt-3 mb-3">
+                <a class="btn btn-secondary" href="{% url 'articulo.list' %}">
+                    <i class="bi bi-arrow-left"></i> Volver
+                </a>
+                {% if articulo.author == request.user %}
+                    <a class="btn btn-secondary" href="{% url 'articulo.update' pk=articulo.id %}">
+                        <i class="bi bi-pencil"></i> Editar
+                    </a>
 
+                    <a class="btn btn-danger" href="{% url 'articulo.delete' pk=articulo.id %}">
+                        <i class="bi bi-trash"></i> Eliminar
+                    </a>
+                {% endif %}
             </div>
-        </div>
-
-        <div class="container mt-3 mb-3">
-            <a class="btn btn-secondary" href="{% url 'articulo.list' %}">
-                <i class="bi bi-arrow-left"></i> Volver
-            </a>
-
-            <a class="btn btn-secondary" href="{% url 'articulo.update' pk=articulo.id %}">
-                <i class="bi bi-pencil"></i> Editar
-            </a>
-
-            <a class="btn btn-danger" href="{% url 'articulo.delete' pk=articulo.id %}">
-                <i class="bi bi-trash"></i> Eliminar
-            </a>
         </div>
     </div>
-</div>
 {% endblock %}
