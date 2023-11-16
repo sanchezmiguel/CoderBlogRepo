@@ -1,66 +1,68 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<nav class="navbar navbar-expand-xxl custom-header w-100 shadow-lg">
-    <div class="container-fluid">
-        <h1 class="my-3">Artículos:</h1>
-        <div>
-            <form action="{% url 'articulo.list' %}" class="form-inline" method="get" style="display: inline-block;">
-                <div>
-                    {{ form.search_text }}
-                    <button class="btn btn-primary" type="submit">
-                        <i class="fas fa-search"></i> Search
-                    </button>
-                </div>
-            </form>
+    <nav class="navbar navbar-expand-xxl custom-header w-100 shadow-lg">
+        <div class="container-fluid">
+            <h1 class="my-3">Artículos:</h1>
+            <div>
+                <form action="{% url 'articulo.list' %}" class="form-inline" method="get"
+                      style="display: inline-block;">
+                    <div>
+                        {{ form.search_text }}
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div aria-label="Ordenar por" class="btn-group" role="group">
+                {% if articulos %}
+                    <a class="btn btn-primary mx-1" href="{% url 'articulo.list' %}?orden=title">
+                        <i class="fas fa-sort-alpha-down"></i> Ordenar por Título
+                    </a>
+                    <a class="btn btn-primary mx-1" href="{% url 'articulo.list' %}?orden=author">
+                        <i class="fas fa-user"></i> Ordenar por Autor
+                    </a>
+                    <a class="btn btn-primary mx-1" href="{% url 'articulo.list' %}?orden=created">
+                        <i class="fas fa-calendar-alt"></i> Ordenar por Fecha
+                    </a>
+                {% endif %}
+            </div>
+
         </div>
-        <div aria-label="Ordenar por" class="btn-group" role="group">
+    </nav>
+    <div class="container mt-3">
+        <div class="row">
             {% if articulos %}
-            <a class="btn btn-primary mx-1" href="{% url 'articulo.list' %}?orden=title">
-                <i class="fas fa-sort-alpha-down"></i> Ordenar por Título
-            </a>
-            <a class="btn btn-primary mx-1" href="{% url 'articulo.list' %}?orden=author">
-                <i class="fas fa-user"></i> Ordenar por Autor
-            </a>
-            <a class="btn btn-primary mx-1" href="{% url 'articulo.list' %}?orden=created">
-                <i class="fas fa-calendar-alt"></i> Ordenar por Fecha
-            </a>
+                {% for articulo in articulos %}
+                    <div class="col-md-4">
+                        <div class="card mb-4 card-color shadow-lg">
+                            {% if articulo.image %}
+                                <img alt="{{ articulo.title }}" class="card-img-top mx-auto"
+                                     src="{{ articulo.image.url }}"
+                                     style="max-height: 200px;">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ articulo.title }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted"
+                                    style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-height: 1.2em;">
+                                    {{ articulo.subtitle }}</h6>
+                                <div class="card-footer">
+                                    <i class="fas fa-user"></i> {{ articulo.author }}
+                                    <i class="fas fa-calendar"></i> {{ articulo.created|date:"Y-m-d" }}
+                                    <br>
+                                    <a class="btn btn-primary mt-3" href="{% url 'articulo.detail' pk=articulo.id %}">
+                                        Leer más <i class="fas fa-arrow-right"></i>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h1><p class="mt-3">No hay entradas aún.</p></h1>
             {% endif %}
         </div>
-
     </div>
-</nav>
-<div class="container mt-3">
-    <div class="row">
-        {% if articulos %}
-        {% for articulo in articulos %}
-        <div class="col-md-4">
-            <div class="card mb-4 card-color shadow-lg">
-                {% if articulo.image %}
-                <img alt="{{ articulo.title }}" class="card-img-top mx-auto" src="{{ articulo.image.url }}"
-                     style="max-height: 200px;">
-                {% endif %}
-                <div class="card-body">
-                    <h5 class="card-title">{{ articulo.title }}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted"
-                        style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-height: 1.2em;">
-                        {{ articulo.subtitle }}</h6>
-                    <div class="card-footer">
-                        <i class="fas fa-user"></i> {{articulo.author}}
-                        <i class="fas fa-calendar"></i> {{articulo.created|date:"Y-m-d" }}
-                        <br>
-                        <a class="btn btn-primary mt-3" href="{% url 'articulo.detail' pk=articulo.id %}">
-                            Leer más <i class="fas fa-arrow-right"></i>
-                        </a>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-        {% else %}
-        <h1><p class="mt-3">No hay entradas aún.</p></h1>
-        {% endif %}
-    </div>
-</div>
 {% endblock %}
