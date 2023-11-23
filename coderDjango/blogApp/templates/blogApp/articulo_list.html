@@ -7,7 +7,7 @@
             <div>
                 <form action="{% url 'articulo.list' %}" class="form-inline" method="get"
                       style="display: inline-block;">
-                    <div>
+                     <div style="display: flex; align-items: center;">
                         {{ form.search_text }}
                         <button class="btn btn-primary" type="submit">
                             <i class="fas fa-search"></i> Search
