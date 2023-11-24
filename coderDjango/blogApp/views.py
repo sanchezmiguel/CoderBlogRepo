@@ -1,8 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Q
+from django.shortcuts import render
+from django.views import View
 from django.views.generic import CreateView, DetailView, UpdateView
-from django.views.generic import ListView
 from django.views.generic.edit import DeleteView
 
 from blogApp.forms import ArticuloForm
@@ -13,12 +15,13 @@ from .models import Articulo
 # Create your views here.
 
 
-class ArticuloListView(ListView):
+class ArticuloListView(View):
     model = Articulo
     context_object_name = 'articulos'
     template_name = 'blogApp/articulo_list.html'
+    paginate_by = 3  # Set the number of articles per page
 
-    def get_queryset(self):
+    def get(self, request, *args, **kwargs):
         # Obtain the value of the 'orden' parameter from the URL
         orden = self.request.GET.get('orden')
 
@@ -51,12 +54,19 @@ class ArticuloListView(ListView):
         else:
             queryset = queryset.order_by('created')
 
-        return queryset
+        # Paginate the queryset
+        page = self.request.GET.get('page', 1)
+        paginator = Paginator(queryset, self.paginate_by)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['form'] = CardSearchForm(self.request.GET)
-        return context
+        try:
+            articulos = paginator.page(page)
+        except PageNotAnInteger:
+            articulos = paginator.page(1)
+        except EmptyPage:
+            articulos = paginator.page(paginator.num_pages)
+
+        context = {'articulos': articulos, 'form': search_form}
+        return render(request, self.template_name, context)
 
 
 class ArticuloDetailView(DetailView):
