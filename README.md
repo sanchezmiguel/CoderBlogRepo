@@ -28,4 +28,11 @@ python manage.py createsuperuser
 + contraseña:admin
 
 # Usuarios normales
-??
++ username:pablo
++ contraseña:Tester.12345
+
++ username:miguel
++ contraseña:Tester.12345
+
+## Video Demo de uso
+https://www.loom.com/share/3a7e49eadd1849e9b1e349768465da57?sid=0d7c0b4c-bb21-4be5-a6eb-ff34309ea10d

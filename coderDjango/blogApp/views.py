@@ -19,7 +19,7 @@ class ArticuloListView(View):
     model = Articulo
     context_object_name = 'articulos'
     template_name = 'blogApp/articulo_list.html'
-    paginate_by = 3  # Set the number of articles per page
+    paginate_by = 6  # Set the number of articles per page
 
     def get(self, request, *args, **kwargs):
         # Obtain the value of the 'orden' parameter from the URL
